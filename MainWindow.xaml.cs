@@ -20,16 +20,42 @@ namespace Lab11
     /// </summary>
     /// 
 
-    static void Main(string[] args)
-    {
-
-    }
+    
 
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private List<Player> CreatePlayers()
+        {
+            Random r = new Random();
+            List<Player> players = new List<Player>();
+
+            string[] firstNames = {
+                "Adam", "Amelia", "Ava", "Chloe", "Conor", "Daniel", "Emily",
+                "Emma", "Grace", "Hannah", "Harry", "Jack", "James",
+                "Lucy", "Luke", "Mia", "Michael", "Noah", "Sean", "Sophie"};
+
+            string[] lastNames = {
+                "Brennan", "Byrne", "Daly", "Doyle", "Dunne", "Fitzgerald", "Kavanagh",
+                "Kelly", "Lynch", "McCarthy", "McDonagh", "Murphy", "Nolan", "O'Brien",
+                "O'Connor", "O'Neill", "O'Reilly", "O'Sullivan", "Ryan", "Walsh"
+            };
+
+            //CreatePlayers
+            for (int i = 0; i < 18; i++)
+            {
+                Player p = new Player()
+                {
+                    FirstName = firstNames[r.Next(firstNames.Length)],
+                    LastName = lastNames[r.Next(lastNames.Length)]
+                };
+                players.Add(p);
+            }
+            return players;
         }
     }
 }
