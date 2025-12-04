@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab11"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid Background="#FFE4E4E4">
         <ListBox x:Name="lbxAllPlayers" HorizontalAlignment="Left" Height="248" Margin="100,121,0,0" VerticalAlignment="Top" Width="194" d:ItemsSource="{d:SampleData ItemCount=5}"/>
         <ComboBox x:Name="cbxFormation" HorizontalAlignment="Left" Height="22" Margin="246,45,0,0" VerticalAlignment="Top" Width="154"/>

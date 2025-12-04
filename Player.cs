@@ -39,7 +39,7 @@ namespace Lab11
         //Methods
         public override string ToString()
         {
-            return $"{FirstName} {LastName}, ({age}), {PreferredPosition.ToString().ToUpper()}";
+            return $"{FirstName} {LastName}, ({Age}), {PreferredPosition.ToString().ToUpper()}";
         }
     }
 }
