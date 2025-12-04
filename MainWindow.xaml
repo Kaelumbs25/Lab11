@@ -11,8 +11,8 @@
         <ComboBox x:Name="cbxFormation" HorizontalAlignment="Left" Height="22" Margin="246,45,0,0" VerticalAlignment="Top" Width="154"/>
         <TextBlock x:Name="tbxFormation" HorizontalAlignment="Left" Height="23" Margin="186,48,0,0" TextWrapping="Wrap" Text="Formation:" VerticalAlignment="Top" Width="60"/>
         <ListBox x:Name="lbxSelectedPlayers" HorizontalAlignment="Left" Height="248" Margin="506,121,0,0" VerticalAlignment="Top" Width="194" d:ItemsSource="{d:SampleData ItemCount=5}"/>
-        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Height="30" Margin="363,164,0,0" VerticalAlignment="Top" Width="82"/>
-        <Button x:Name="btnRemove" Content="Remove" HorizontalAlignment="Left" Height="30" Margin="363,245,0,0" VerticalAlignment="Top" Width="82"/>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Height="30" Margin="363,164,0,0" VerticalAlignment="Top" Width="82" Click="btnAdd_Click"/>
+        <Button x:Name="btnRemove" Content="Remove" HorizontalAlignment="Left" Height="30" Margin="363,245,0,0" VerticalAlignment="Top" Width="82" Click="btnRemove_Click"/>
         <TextBlock x:Name="tbxSpaces1" HorizontalAlignment="Left" Height="22" Margin="548,389,0,0" TextWrapping="Wrap" Text="Spaces: " VerticalAlignment="Top" Width="48"/>
         <TextBlock x:Name="tbxSpaces" HorizontalAlignment="Left" Margin="601,389,0,0" TextWrapping="Wrap" Text="A" VerticalAlignment="Top"/>
         <TextBlock x:Name="tbxAllPlayers" HorizontalAlignment="Left" Margin="170,95,0,0" TextWrapping="Wrap" Text="All Players" VerticalAlignment="Top"/>

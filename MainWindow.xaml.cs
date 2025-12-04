@@ -97,5 +97,43 @@ namespace Lab11
             lbxAllPlayers.ItemsSource = allPlayers;
 
         }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            //Determine selected player
+            Player selected = lbxAllPlayers.SelectedItem as Player;
+
+            //check not null
+            if(selected !=null)//for making sure a pplayer is slected
+            {
+                selectedPlayers.Add(selected);
+                allPlayers.Remove(selected);
+
+                lbxAllPlayers.ItemsSource = null;
+                lbxAllPlayers.ItemsSource = allPlayers;
+
+                lbxSelectedPlayers.ItemsSource = null;
+                lbxSelectedPlayers.ItemsSource = selectedPlayers;
+            }
+        }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            //Determine selected player
+            Player selected = lbxSelectedPlayers.SelectedItem as Player;
+
+            //check not null
+            if (selected != null)//for making sure a pplayer is slected
+            {
+                selectedPlayers.Remove(selected);
+                allPlayers.Add(selected);
+
+                lbxAllPlayers.ItemsSource = null;
+                lbxAllPlayers.ItemsSource = allPlayers;
+
+                lbxSelectedPlayers.ItemsSource = null;
+                lbxSelectedPlayers.ItemsSource = selectedPlayers;
+            }
+        }
     }
 }
