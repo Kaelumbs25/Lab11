@@ -8,7 +8,7 @@ namespace Lab11
 {
     public enum Position { Goalkeeper, Defender, Midfielder, Forward}
 
-    public class Player
+    public class Player : IComparable
     {
         //Properties
         public string FirstName { get; set; }
@@ -40,6 +40,18 @@ namespace Lab11
         public override string ToString()
         {
             return $"{FirstName} {LastName}, ({Age}), {PreferredPosition.ToString().ToUpper()}";
+        }
+
+        public int CompareTo(object obj)
+        {
+            Player that = obj as Player;
+
+            if (this.PreferredPosition > that.PreferredPosition )
+                return 1;
+            else if (this.PreferredPosition < that.PreferredPosition) 
+                return -1;
+            else
+                return this.FirstName.CompareTo(that.FirstName);
         }
     }
 }

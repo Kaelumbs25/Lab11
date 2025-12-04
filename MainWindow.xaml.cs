@@ -92,7 +92,7 @@ namespace Lab11
         {
             //Create Players
             allPlayers = CreatePlayers();
-
+            allPlayers.Sort();
             //Display Listox
             lbxAllPlayers.ItemsSource = allPlayers;
 
@@ -115,6 +115,9 @@ namespace Lab11
                 {
                     selectedPlayers.Add(selected);
                     allPlayers.Remove(selected);
+
+                    selectedPlayers.Sort();
+                    allPlayers.Sort();
 
                     lbxAllPlayers.ItemsSource = null;
                     lbxAllPlayers.ItemsSource = allPlayers;
@@ -139,6 +142,9 @@ namespace Lab11
             {
                 selectedPlayers.Remove(selected);
                 allPlayers.Add(selected);
+
+                selectedPlayers.Sort();
+                allPlayers.Sort();
 
                 lbxAllPlayers.ItemsSource = null;
                 lbxAllPlayers.ItemsSource = allPlayers;
