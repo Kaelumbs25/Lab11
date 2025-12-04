@@ -26,6 +26,7 @@ namespace Lab11
     {
         List<Player> allPlayers = new List<Player>();
         List<Player> selectedPlayers = new List<Player>();
+        int selectedGoalKeepers, selectedDefenders, selectedMidfielders, selectedForwards;
 
         public MainWindow()
         {
@@ -96,6 +97,8 @@ namespace Lab11
             //Display Listox
             lbxAllPlayers.ItemsSource = allPlayers;
 
+            //Sett up ComboBox
+            cbxFormation.ItemsSource = new string[] { "4-4-2", "4-3-3", "4-5-1" };
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -113,23 +116,57 @@ namespace Lab11
                 //check not null
                 if (selected != null)//for making sure a pplayer is slected
                 {
-                    selectedPlayers.Add(selected);
-                    allPlayers.Remove(selected);
+                    //check player allowed in formation
+                    if(isValidPlayer(selected))
+                    {
+                        selectedPlayers.Add(selected);
+                        allPlayers.Remove(selected);
 
-                    selectedPlayers.Sort();
-                    allPlayers.Sort();
+                        RefreshScreen();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Not allowed in formation");
+                    }
 
-                    lbxAllPlayers.ItemsSource = null;
-                    lbxAllPlayers.ItemsSource = allPlayers;
 
-                    lbxSelectedPlayers.ItemsSource = null;
-                    lbxSelectedPlayers.ItemsSource = selectedPlayers;
-
-                    tbxSpaces.Text = (11-selectedPlayers.Count()).ToString();
+                    
                 }
 
             }
 
+        }
+
+        private void cbxFormation_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //reset
+            foreach(Player player in selectedPlayers)
+            {
+                allPlayers.Add(player);
+            }
+
+            selectedPlayers.Clear();
+
+            selectedMidfielders = 0;
+            selectedGoalKeepers = 0;
+            selectedForwards = 0;
+            selectedDefenders = 0;
+
+            RefreshScreen();
+        }
+
+        private void RefreshScreen()
+        {
+            selectedPlayers.Sort();
+            allPlayers.Sort();
+
+            lbxAllPlayers.ItemsSource = null;
+            lbxAllPlayers.ItemsSource = allPlayers;
+
+            lbxSelectedPlayers.ItemsSource = null;
+            lbxSelectedPlayers.ItemsSource = selectedPlayers;
+
+            tbxSpaces.Text = (11 - selectedPlayers.Count()).ToString();
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
@@ -143,17 +180,79 @@ namespace Lab11
                 selectedPlayers.Remove(selected);
                 allPlayers.Add(selected);
 
-                selectedPlayers.Sort();
-                allPlayers.Sort();
+                RefreshScreen();
 
-                lbxAllPlayers.ItemsSource = null;
-                lbxAllPlayers.ItemsSource = allPlayers;
+                switch(selected.PreferredPosition)
+                {
+                    case Position.Goalkeeper:
+                        selectedGoalKeepers--;
+                        break;
+                    case Position.Defender:
+                        selectedDefenders--;
+                        break;
+                    case Position.Midfielder:
+                        selectedMidfielders--;
+                        break;
+                    case Position.Forward:
+                        selectedForwards--;
+                        break;
+                }
 
-                lbxSelectedPlayers.ItemsSource = null;
-                lbxSelectedPlayers.ItemsSource = selectedPlayers;
-
-                tbxSpaces.Text = (11 - selectedPlayers.Count()).ToString();
+                
             }
+        }
+
+        private bool isValidPlayer(Player player)
+        {
+            int allowedGoalKeepers = 1;
+            bool isValid = false;
+            if (selectedGoalKeepers < allowedGoalKeepers)
+            {
+                selectedGoalKeepers++;
+                isValid = true;
+            }
+
+
+            string input = cbxFormation.Text;
+            if (input != "")
+            {
+                string selectedFormation = cbxFormation.SelectedItem as string;
+                string[] formation = selectedFormation.Split('-');
+
+                
+                int allowedDefenders = int.Parse(formation[0]);
+                int allowedMidfielders = int.Parse(formation[1]);
+                int allowedForwards = int.Parse(formation[2]);
+
+                switch (player.PreferredPosition)
+                {
+                    case Position.Defender:
+                        if (selectedDefenders < allowedDefenders)
+                        {
+                            selectedDefenders++;
+                            isValid = true;
+                        }
+                        break;
+                    case Position.Midfielder:
+                        if (selectedMidfielders < allowedMidfielders)
+                        {
+                            selectedMidfielders++;
+                            isValid = true;
+                        }
+                        break;
+                    case Position.Forward:
+                        if (selectedForwards < allowedForwards)
+                        {
+                            selectedForwards++;
+                            isValid = true;
+                        }
+                        break;
+                }
+
+            }
+            
+
+            return isValid;
         }
     }
 }
