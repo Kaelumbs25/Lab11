@@ -100,21 +100,33 @@ namespace Lab11
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            //Determine selected player
-            Player selected = lbxAllPlayers.SelectedItem as Player;
-
-            //check not null
-            if(selected !=null)//for making sure a pplayer is slected
+            //Check spaces
+            if (selectedPlayers.Count > 10)
             {
-                selectedPlayers.Add(selected);
-                allPlayers.Remove(selected);
-
-                lbxAllPlayers.ItemsSource = null;
-                lbxAllPlayers.ItemsSource = allPlayers;
-
-                lbxSelectedPlayers.ItemsSource = null;
-                lbxSelectedPlayers.ItemsSource = selectedPlayers;
+                MessageBox.Show("You have too many players selected");
             }
+            else
+            {
+                //Determine selected player
+                Player selected = lbxAllPlayers.SelectedItem as Player;
+
+                //check not null
+                if (selected != null)//for making sure a pplayer is slected
+                {
+                    selectedPlayers.Add(selected);
+                    allPlayers.Remove(selected);
+
+                    lbxAllPlayers.ItemsSource = null;
+                    lbxAllPlayers.ItemsSource = allPlayers;
+
+                    lbxSelectedPlayers.ItemsSource = null;
+                    lbxSelectedPlayers.ItemsSource = selectedPlayers;
+
+                    tbxSpaces.Text = (11-selectedPlayers.Count()).ToString();
+                }
+
+            }
+
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
@@ -133,6 +145,8 @@ namespace Lab11
 
                 lbxSelectedPlayers.ItemsSource = null;
                 lbxSelectedPlayers.ItemsSource = selectedPlayers;
+
+                tbxSpaces.Text = (11 - selectedPlayers.Count()).ToString();
             }
         }
     }
